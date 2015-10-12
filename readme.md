@@ -60,6 +60,16 @@ You should receive a JSON response:
 	...
 		"response-ratelimiting"]
 	}
+  "tagline": "Welcome to Kong",
+  "version": "0.4.1",
+  "hostname": "precise64",
+  "lua_version": "LuaJIT 2.1.0-alpha",
+  "plugins": {
+    "enabled_in_cluster": {},
+    "available_on_server": [
+      ...
+    ]
+  }
 }
 ```
 [kong-logo]: http://i.imgur.com/4jyQQAZ.png
