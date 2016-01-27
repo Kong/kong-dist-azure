@@ -48,7 +48,7 @@
     "location": {
       "type": "string",
       "defaultValue": "West Europe",
-	  "allowedValues": [
+      "allowedValues": [
         "East US",
         "West US",
         "Central US",
@@ -61,11 +61,11 @@
         "Japan West",
         "Japan East"
       ],
-	  "metadata": {
+      "metadata": {
         "description": "Azure region where application gateway will be deployed"
       }
     }
-  
+
   },
   "variables": {
     "location": "West Europe",
@@ -98,14 +98,14 @@
       }
     },
 
-     {
+    {
       "apiVersion": "2015-05-01-preview",
       "type": "Microsoft.Network/networkSecurityGroups",
       "name": "[parameters('kongNSGName')]",
       "location": "[parameters('location')]",
       "properties": {
         "securityRules": [
-           {
+          {
             "name": "ssh",
             "properties": {
               "description": "Inbound proxy port",
@@ -118,7 +118,7 @@
               "priority": 100,
               "direction": "Inbound"
             }
-          },{
+          }, {
             "name": "proxy_port",
             "properties": {
               "description": "Inbound proxy port",
@@ -148,11 +148,7 @@
           }
         ]
       }
-    },
-   
-
-
-    {
+    }, {
       "apiVersion": "2015-05-01-preview",
       "type": "Microsoft.Network/publicIPAddresses",
       "name": "[variables('publicIPAddressName')]",
@@ -163,13 +159,12 @@
           "domainNameLabel": "[parameters('dnsNameForPublicIP')]"
         }
       }
-    },
-    {
+    }, {
       "apiVersion": "2015-05-01-preview",
       "type": "Microsoft.Network/virtualNetworks",
       "name": "[variables('virtualNetworkName')]",
       "location": "[variables('location')]",
-      "dependsOn":[
+      "dependsOn": [
         "[concat('Microsoft.Network/networkSecurityGroups/',parameters('kongNSGName'))]"
       ],
       "properties": {
@@ -183,16 +178,15 @@
             "name": "[variables('subnetName')]",
             "properties": {
               "addressPrefix": "[variables('subnetPrefix')]",
-              "networkSecurityGroups":{
-                "id":"[resourceId('Microsoft.Network/networkSecurityGroups',parameters('kongNSGName'))]"
+              "networkSecurityGroups": {
+                "id": "[resourceId('Microsoft.Network/networkSecurityGroups',parameters('kongNSGName'))]"
               }
 
             }
           }
         ]
       }
-    },
-    {
+    }, {
       "apiVersion": "2015-05-01-preview",
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[variables('nicName')]",
@@ -217,8 +211,7 @@
           }
         ]
       }
-    },
-    {
+    }, {
       "apiVersion": "2015-06-15",
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[variables('vmName')]",
@@ -277,32 +270,30 @@
         }
       },
       "resources": [
-          {
-              "name": "install",
-              "type": "extensions",
-              "location": "[variables('location')]",
-              "apiVersion": "2015-06-15",
-              "dependsOn": [
-                  "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'))]"
+        {
+          "name": "install",
+          "type": "extensions",
+          "location": "[variables('location')]",
+          "apiVersion": "2015-06-15",
+          "dependsOn": [
+            "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'))]"
+          ],
+          "tags": {
+            "displayName": "install"
+          },
+          "properties": {
+            "publisher": "Microsoft.OSTCExtensions",
+            "type": "CustomScriptForLinux",
+            "typeHandlerVersion": "1.2",
+            "autoUpgradeMinorVersion": true,
+            "settings": {
+              "fileUris": [
+                "https://raw.githubusercontent.com/jdevillard/kong-azure/master/kongscript.sh"
               ],
-              "tags": {
-                  "displayName": "install"
-              },
-              "properties": {
-                  "publisher": "Microsoft.OSTCExtensions",
-                  "type": "CustomScriptForLinux",
-                  "typeHandlerVersion": "1.2",
-                  "autoUpgradeMinorVersion": true,
-                  "settings": {
-                      "fileUris": [
-                          "https://raw.githubusercontent.com/jdevillard/kong-azure/master/kongscript.sh"
-                      ],
-                      "commandToExecute": "bash kongscript.sh"
-                  }
-              }
+              "commandToExecute": "bash kongscript.sh"
+            }
           }
-          
-
+        }
       ]
     }
   ]

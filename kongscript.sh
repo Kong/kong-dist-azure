@@ -1,9 +1,11 @@
 #!/bin/bash
-CASSANDRA_VERSION=2.1.8
+CASSANDRA_VERSION=2.2.4
+
+echo "Installing Dependencies"
+sudo apt-get update
+sudo apt-get install -y git curl make unzip netcat openssl libpcre3 dnsmasq procps
 
 echo "Installing Java"
-
-# Install Oracle Java
 sudo mkdir -p /usr/lib/jvm
 sudo wget -q -O /tmp/jre-linux-x64.tar.gz --no-cookies --no-check-certificate --header 'Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie' http://download.oracle.com/otn-pub/java/jdk/8u60-b27/jre-8u60-linux-x64.tar.gz
 sudo tar zxvf /tmp/jre-linux-x64.tar.gz -C /usr/lib/jvm
@@ -16,19 +18,15 @@ echo "Java installed"
 echo "Installing Cassandra"
 echo 'deb http://debian.datastax.com/community stable main' | tee -a /etc/apt/sources.list.d/cassandra.sources.list
 sudo wget -q -O - '$@' http://debian.datastax.com/debian/repo_key | apt-key add -
-
-sudo apt-get update
-sudo apt-get install git curl make unzip netcat lua5.1 openssl libpcre3 dnsmasq cassandra=$CASSANDRA_VERSION -y --force-yes
+sudo apt-get install cassandra=$CASSANDRA_VERSION -y --force-yes
 java -version
 echo "Cassandra installed"
 
 echo 'nameserver 10.0.2.3' >> /etc/resolv.conf
 sudo /etc/init.d/cassandra restart
 
-# install Kong
-wget https://downloadkong.org/trusty_all.deb -O current-kong.deb
-
-sudo apt-get update
-sudo apt-get install -y netcat lua5.1 openssl libpcre3 dnsmasq
-sudo dpkg -i current-kong.deb
-kong start 
+echo "Installing Kong"
+wget https://downloadkong.org/trusty_all.deb -O kong-latest.deb
+sudo dpkg -i kong-latest.deb
+kong start
+echo "Kong installed"

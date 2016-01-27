@@ -2,7 +2,7 @@
 
 [![Website][website-badge]][website-url]
 
-[![][kong-logo]][website-url]
+[![Logo][kong-logo]][website-url]
 
 Microsoft Azure is used to create an virtual machine for development environment with Kong &including Cassandra.
 
@@ -10,19 +10,19 @@ Microsoft Azure is used to create an virtual machine for development environment
 
 ```shell
 # clone this repository
-$ git clone https://github.com/jdevillard/kong-azure
+$ git clone https://github.com/Mashape/kong-dist-azure
 ```
 
 Change (at least) the following parameters in the azuredeploy.parameters.json :
 - newStorageAccountName : azure storage account
 - adminUsername : admin username used for the SSH Connection
 - sshKeyData : ssh key data, you can follow this [tutorial][ssh-key-tuto] to generate your ssh key
-- dnsNameForPublicIP : Public DNS Name of the Virtual Machine 
+- dnsNameForPublicIP : Public DNS Name of the Virtual Machine
 
-Change the following parameter in the deploy.ps1 script : 
+Change the following parameter in the deploy.ps1 script :
 - $subscriptionId : the id of your azure subscription
 
-Then go to the script folder and execute the script 
+Then go to the script folder and execute the script
 ```PowerShell
  . .\deploy.ps1
 ```
@@ -32,10 +32,10 @@ Then go to the script folder and execute the script
 To verify Kong is running successfully, execute the following command from the host machine:
 
 ```shell
-$ curl  http://<DNS>.<Location>.cloudpapp.azure.com:8001 
+$ curl  http://<DNS>.<Location>.cloudpapp.azure.com:8001
 ```
 
-so with the default value : 
+so with the default value :
 
 ```shell
 $ curl  http://kongtemplate1.westeurope.cloudapp.azure.com:8001
@@ -45,29 +45,19 @@ You should receive a JSON response:
 
 ```javascript
 {
-	"version": "0.5.0",
-	"lua_version": "LuaJIT 2.1.0-alpha",
-	"tagline": "Welcome to Kong",
-	"hostname": "MyAzureKongVM",
-	"plugins": {
-		"enabled_in_cluster": {
-			
-		},
-		"available_on_server": ["ssl",
-		"jwt",
-		"acl",
-		"cors",
-	...
-		"response-ratelimiting"]
-	}
-  "tagline": "Welcome to Kong",
-  "version": "0.4.1",
-  "hostname": "precise64",
+  "version": "0.5.0",
   "lua_version": "LuaJIT 2.1.0-alpha",
+  "tagline": "Welcome to Kong",
+  "hostname": "MyAzureKongVM",
   "plugins": {
     "enabled_in_cluster": {},
     "available_on_server": [
+      "ssl",
+      "jwt",
+      "acl",
+      "cors",
       ...
+      "response-ratelimiting"
     ]
   }
 }

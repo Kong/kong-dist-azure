@@ -1,8 +1,7 @@
 ﻿#Indicate your new ResourceGroupName
 $resourceGroupName = "kong1";
-$subscriptionId = "4a81a3c5-f813-42bf-b6de-3a1c242ade9a";
+$subscriptionId = "Put Your Subscription Id Here";
 $location = "West Europe"
-
 
 Add-AzureAccount
 

@@ -1,15 +1,14 @@
 {
   "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
-  "parameters":
-	{
+  "parameters": {
     "newStorageAccountName": {
       "value": "kongtemplate1"
     },
     "adminUsername": {
       "value": "kongAdmin"
     },
-	"sshKeyData": {
+    "sshKeyData": {
       "value": "put your ssh key here"
     },
     "dnsNameForPublicIP": {
@@ -18,12 +17,11 @@
     "ubuntuOSVersion": {
       "value": "14.04.2-LTS"
     },
-	"location": {
+    "location": {
       "value": "West Europe"
     },
-   
-	"kongNSGName" : {
-		"value":"kongnsg1"
-	}
+    "kongNSGName": {
+      "value": "kongnsg1"
+    }
   }
 }

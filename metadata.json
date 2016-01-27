@@ -2,6 +2,6 @@
   "itemDisplayName": "Deploy a Kong instance with Cassandra in a single VM in West US",
   "description": "This template allows you to deploy a simple Ubuntu VM with a Kong Instance and local Apache Cassandra",
   "summary": "This template takes a minimum amount of parameters and deploys the VM",
-  "githubUsername": "jdevillard",
-  "dateUpdated": "2015-10-02"
+  "githubUsername": "Mashape",
+  "dateUpdated": "2016-01-27"
 }
