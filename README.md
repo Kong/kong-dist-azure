@@ -6,6 +6,10 @@
 
 Microsoft Azure is used to create an virtual machine for development environment with Kong &including Cassandra.
 
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FMashape%2Fkong-dist-azure%2Fmaster%2Fazuredeploy.json" target="_blank">
+    <img src="http://azuredeploy.net/deploybutton.png"/>
+</a>
+
 ## Starting the environment
 
 ```shell
