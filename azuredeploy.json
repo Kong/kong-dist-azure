@@ -75,8 +75,8 @@
         "West Central",
         "West Europe",
         "West India",
-        "West US 2"
-        "West US",
+        "West US 2",
+        "West US"
       ],
       "metadata": {
         "description": "Azure region where application gateway will be deployed"
